@@ -57,4 +57,4 @@ kitchen destroy
 
 Test Summary: 3 successful, 0 failures, 0 skipped
        Finished verifying <default-terraform> (0m0.40s).
-       ```
+```
