@@ -56,4 +56,5 @@ kitchen destroy
      ✔  exit_status should eq 0
 
 Test Summary: 3 successful, 0 failures, 0 skipped
-       Finished verifying <default-terraform> (0m0.40s).```
+       Finished verifying <default-terraform> (0m0.40s).
+       ```
