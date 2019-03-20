@@ -1,5 +1,4 @@
-# This repo contains a demo of [Consul](https://www.consul.io/) cluster in AWS over HTTP as a systemd daemon service.
-
+# This repo contains a demo of [Consul](https://www.consul.io/) cluster in AWS using [module](https://github.com/chavo1/consul-terraform)
 ## Prerequisites
 
 - Please install the following component:
