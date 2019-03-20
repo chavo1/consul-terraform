@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -23,12 +23,9 @@ echo $nginx > /var/www/html/index.nginx-debian.html
 
 # If we consul-template
 elif  which consul-template >/dev/null; then
-
 set -x
-export HOST=$HOST
-consul-template -config=/vagrant/templates/config.hcl > /vagrant/consul_logs/template_$HOST.log & 
-
-
+    export HOST=$HOST
+    consul-template -config /tmp/templates/config.hcl > /tmp/template_$HOST.log & 
 else
   
   # Updating nginx start page
