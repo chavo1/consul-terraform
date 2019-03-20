@@ -21,8 +21,8 @@ key_name = ""
 region = ""
 instance_type = ""
 subnet = "< VPC subnet ID >"
-client_count = 1
-server_count = 1
+client_count = 2
+server_count = 2
 ```
 
 ### We can start with deploying process
@@ -50,11 +50,42 @@ kitchen destroy
 ```
 - The output from the test for 1 Consul server and 1 Consul client should as follow
 ```
-  Command: `terraform state list`
-     ✔  stdout should eq "module.consul-terraform.aws_instance.client\nmodule.consul-terraform.aws_instance.server\n"
-     ✔  stderr should eq ""
+Command: `terraform state list`
+     ✔  stdout should include "module.consul-terraform.aws_instance.client[0]"
+     ✔  stderr should include ""
      ✔  exit_status should eq 0
+  Command: `terraform state list`
+     ✔  stdout should include "module.consul-terraform.aws_instance.server[0]"
+     ✔  stderr should include ""
+     ✔  exit_status should eq 0
+  Command: `terraform state list`
+     ✔  stdout should include "module.consul-terraform.aws_instance.client[1]"
+     ✔  stderr should include ""
+     ✔  exit_status should eq 0
+  Command: `terraform state list`
+     ✔  stdout should include "module.consul-terraform.aws_instance.server[1]"
+     ✔  stderr should include ""
+     ✔  exit_status should eq 0
+  http GET on http://ec2-54-82-99-129.compute-1.amazonaws.com:80
+     ✔  status should cmp == 200
+  http GET on http://ec2-54-82-99-129.compute-1.amazonaws.com:8500/ui/dc1/nodes
+     ✔  status should cmp == 200
+  http GET on http://ec2-54-82-99-129.compute-1.amazonaws.com:8500/ui/dc1/services/web
+     ✔  status should cmp == 200
+  http GET on http://ec2-34-227-207-153.compute-1.amazonaws.com:8500/ui/dc1/nodes
+     ✔  status should cmp == 200
+  http GET on http://ec2-34-227-207-153.compute-1.amazonaws.com:8500/ui/dc1/services/web
+     ✔  status should cmp == 200
+  http GET on http://ec2-54-83-64-254.compute-1.amazonaws.com:80
+     ✔  status should cmp == 200
+  http GET on http://ec2-54-83-64-254.compute-1.amazonaws.com:8500/ui/dc1/nodes
+     ✔  status should cmp == 200
+  http GET on http://ec2-54-83-64-254.compute-1.amazonaws.com:8500/ui/dc1/services/web
+     ✔  status should cmp == 200
+  http GET on http://ec2-54-196-135-51.compute-1.amazonaws.com:8500/ui/dc1/nodes
+     ✔  status should cmp == 200
+  http GET on http://ec2-54-196-135-51.compute-1.amazonaws.com:8500/ui/dc1/services/web
+     ✔  status should cmp == 200
 
-Test Summary: 3 successful, 0 failures, 0 skipped
-       Finished verifying <default-terraform> (0m0.40s).
+Test Summary: 22 successful, 0 failures, 0 skipped
 ```
